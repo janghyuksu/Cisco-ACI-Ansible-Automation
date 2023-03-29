@@ -1,0 +1,72 @@
+- name: Query all tenants
+  hosts: apic
+  connection: local
+  gather_facts: no
+   
+  tasks:
+    - name: Add a new tenant
+      aci_tenant:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test
+        description: Tenant created using Ansible
+        validate_certs: no
+        state: present 
+    - name: Add a new AP
+      aci_ap:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test
+        ap: default
+        description: default ap
+        state: present   
+        validate_certs: no
+    - name: Add a new VRF to a tenant
+      aci_vrf:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        vrf: vrf_lab
+        tenant: Ansible_Test
+        descr: Lab VRF
+        policy_control_preference: enforced
+        policy_control_direction: ingress
+        validate_certs: no
+        state: present         
+    - name: Add Bridge Domain
+      aci_bd:
+        host: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: false
+        state: present
+        tenant: Ansible_Test
+        bd: Ansible_Bd
+        vrf: vrf_lab
+        arp_flooding: yes
+        l2_unknown_unicast: flood
+    - name : Create a subnet
+      aci_bd_subnet:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test
+        bd: Ansible_Bd
+        gateway: 10.1.1.1
+        mask: 24
+        state: present
+        validate_certs: no
+
+    - name: Add a new contract
+      aci_contract:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test
+        contract: web_to_db
+        description: Communication between web-servers and database
+        scope: application-profile
+        state: present
+        delegate_to: localhost

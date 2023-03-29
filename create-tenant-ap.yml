@@ -1,0 +1,25 @@
+- name: Query all tenants
+  hosts: apic
+  connection: local
+  gather_facts: no
+   
+  tasks:
+    - name: Add a new tenant
+      aci_tenant:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test
+        description: Tenant created using Ansible
+        validate_certs: no
+        state: present 
+    - name: Add a new AP
+      aci_ap:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test
+        ap: default
+        description: default ap
+        state: present   
+        validate_certs: no          

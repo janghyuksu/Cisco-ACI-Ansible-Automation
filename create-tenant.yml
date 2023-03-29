@@ -1,0 +1,69 @@
+- name: Query all tenants
+  hosts: apic
+  connection: local
+  gather_facts: no
+   
+  tasks:
+    - name: Add a new tenant
+      aci_tenant:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test
+        description: Tenant created using Ansible
+        validate_certs: no
+        state: present
+    - name : Add a new tenant2
+      aci_tenant:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test2
+        description: Tenant created using Ansible
+        validate_certs: no
+        state: present
+    - name : Add a new tenant3
+      aci_tenant:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test3
+        description: Tenant created using Ansible
+        validate_certs: no
+        state: present
+    - name: Add a new tenant4
+      aci_tenant:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test4
+        description: Tenant created using Ansible
+        validate_certs: no
+        state: present
+    - name : Add a new tenant5
+      aci_tenant:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test5
+        description: Tenant created using Ansible
+        validate_certs: no
+        state: present
+    - name : Add a new tenant6
+      aci_tenant:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test6
+        description: Tenant created using Ansible
+        validate_certs: no
+        state: present
+    - name : Add a new tenant7
+      aci_tenant:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        tenant: Ansible_Test7
+        description: Tenant created using Ansible
+        validate_certs: no
+        state: present
